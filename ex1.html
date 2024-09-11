@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequency Distribution Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9f9; /* Light gray background */
+            color: #333333; /* Dark gray text */
+            margin: 20px;
+        }
+        textarea, input, button {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 2px solid #1e2a38; /* Dark blue border */
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #ffffff; /* White background for textarea */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1e2a38; /* Dark blue button */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #142028; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #1e2a38; /* Dark blue background */
+            color: #ffffff; /* White text */
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Above the button */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .section {
+            border: 2px solid #1e2a38; /* Dark blue border */
+            background-color: #ffffff; /* White background for sections */
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .section h3 {
+            margin-top: 0;
+            background-color: #1e2a38; /* Dark blue header background */
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .content div {
+            flex: 1;
+            min-width: 250px; /* Minimum width for responsiveness */
+            margin: 0 10px;
+            border: 2px solid #1e2a38; /* Dark blue border */
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9f9; /* Light gray background for content boxes */
+            transition: background-color 0.3s ease;
+        }
+        .content div:hover {
+            background-color: #e0e0e0; /* Slightly darker gray on hover */
+        }
+        .content h4 {
+            color: #1e2a38;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        table, th, td {
+            border: 2px solid #1e2a38;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1e2a38;
+            color: #ffffff;
+        }
+        .loader {
+            border: 16px solid #f3f3f3; /* Light gray */
+            border-top: 16px solid #1e2a38; /* Dark blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .content div {
+                margin: 10px 0;
+            }
+        }
+        .reset-btn {
+            background-color: #e53935; /* Red button */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .reset-btn:hover {
+            background-color: #c62828; /* Darker red on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+        .reset-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5); /* Focus shadow */
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="color: #1e2a38;">Frequency Distribution Experiment</h1>
+<p>Enter a set of numbers separated by commas:</p>
+<textarea id="inputData" placeholder="e.g., 1, 2, 2, 3, 3, 3, 4, 4, 4, 4"></textarea>
+<br>
+<div class="tooltip">
+    <button onclick="calculateFrequency()">Calculate Frequency Distribution</button>
+    <span class="tooltiptext">Click to calculate frequency distribution</span>
+</div>
+<button class="reset-btn" onclick="resetFields()">Reset</button>
+
+<div class="loader" id="loader" style="display: none;"></div>
+<div class="output" id="output"></div>
+
+<div class="section">
+    <h3>Frequency Distribution Analysis</h3>
+    <div class="content">
+        <div>
+            <h4>Formula</h4>
+            <p><strong>Frequency:</strong> Count the number of times each value appears in the dataset.</p>
+            <p><strong>Relative Frequency:</strong> Formula: (Frequency / Total Number of Observations).</p>
+            <p><strong>Cumulative Frequency:</strong> Running total of frequencies up to each value.</p>
+        </div>
+        <div>
+            <h4>Calculation Process</h4>
+            <p>1. Count the frequency of each unique value.</p>
+            <p>2. Calculate the relative frequency using the formula: <code>Relative Frequency = Frequency / Total Number of Observations</code>.</p>
+            <p>3. Compute cumulative frequency by summing frequencies up to each value.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateFrequency() {
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block'; // Show loading spinner
+
+    setTimeout(() => { // Simulate delay
+        const data = document.getElementById('inputData').value
+            .split(',')
+            .map(Number)
+            .filter(n => !isNaN(n)); // Convert input to numbers and filter invalid entries
+
+        if (data.length === 0) {
+            document.getElementById('output').innerText = "Please enter valid numbers.";
+            loader.style.display = 'none'; // Hide loading spinner
+            return;
+        }
+
+        // Frequency Distribution Calculation
+        const min = Math.min(...data);
+        const max = Math.max(...data);
+        const bins = Math.ceil(max - min + 1); // Number of bins (adjust as needed)
+        const binSize = (max - min) / bins;
+
+        const frequency = {};
+        const cumulativeFrequency = {};
+        let cumulativeCount = 0;
+
+        for (let i = min; i <= max; i++) {
+            frequency[i] = 0;
+            cumulativeFrequency[i] = 0;
+        }
+
+        data.forEach(num => {
+            frequency[num]++;
+            cumulativeCount++;
+            cumulativeFrequency[num] = cumulativeCount;
+        });
+
+        // Display Frequency Table
+        let output = `<h3>Frequency Distribution:</h3><table><tr><th>Value</th><th>Frequency</th><th>Relative Frequency</th><th>Cumulative Frequency</th></tr>`;
+        for (let value in frequency) {
+            const relFreq = (frequency[value] / data.length).toFixed(2);
+            output += `<tr><td>${value}</td><td>${frequency[value]}</td><td>${relFreq}</td><td>${cumulativeFrequency[value]}</td></tr>`;
+        }
+        output += `</table>`;
+        
+        document.getElementById('output').innerHTML = output;
+        loader.style.display = 'none'; // Hide loading spinner
+    }, 500); // Simulate 500ms delay
+}
+
+function resetFields() {
+    document.getElementById('inputData').value = '';
+    document.getElementById('output').innerHTML = '';
+}
+</script>
+
+</body>
+</html>
+
+
