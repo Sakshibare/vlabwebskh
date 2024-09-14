@@ -1,14 +1,15 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frequency Distribution Experiment</title>
     <style>
+        /* Your existing styles remain unchanged */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9f9; /* Light gray background */
-            color: #333333; /* Dark gray text */
+            background-color: #f8f9f9;
+            color: #333333;
             margin: 20px;
         }
         textarea, input, button {
@@ -18,14 +19,14 @@
         textarea {
             width: 100%;
             height: 100px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #1e2a38;
             border-radius: 5px;
             padding: 10px;
-            background-color: #ffffff; /* White background for textarea */
+            background-color: #ffffff;
         }
         button {
             padding: 10px 20px;
-            background-color: #1e2a38; /* Dark blue button */
+            background-color: #1e2a38;
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -33,12 +34,12 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #142028; /* Darker blue on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #142028;
+            transform: scale(1.05);
         }
         button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5);
         }
         .tooltip {
             position: relative;
@@ -47,14 +48,14 @@
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 120px;
-            background-color: #1e2a38; /* Dark blue background */
-            color: #ffffff; /* White text */
+            background-color: #1e2a38;
+            color: #ffffff;
             text-align: center;
             border-radius: 5px;
             padding: 5px 0;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Above the button */
+            bottom: 125%;
             left: 50%;
             margin-left: -60px;
             opacity: 0;
@@ -68,15 +69,15 @@
             margin-top: 20px;
         }
         .section {
-            border: 2px solid #1e2a38; /* Dark blue border */
-            background-color: #ffffff; /* White background for sections */
+            border: 2px solid #1e2a38;
+            background-color: #ffffff;
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
         }
         .section h3 {
             margin-top: 0;
-            background-color: #1e2a38; /* Dark blue header background */
+            background-color: #1e2a38;
             color: #ffffff;
             padding: 10px;
             border-radius: 5px 5px 0 0;
@@ -84,22 +85,22 @@
         }
         .content {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
         }
         .content div {
             flex: 1;
-            min-width: 250px; /* Minimum width for responsiveness */
+            min-width: 250px;
             margin: 0 10px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #1e2a38;
             padding: 10px;
             border-radius: 5px;
-            background-color: #f8f9f9; /* Light gray background for content boxes */
+            background-color: #f8f9f9;
             transition: background-color 0.3s ease;
         }
         .content div:hover {
-            background-color: #e0e0e0; /* Slightly darker gray on hover */
+            background-color: #e0e0e0;
         }
         .content h4 {
             color: #1e2a38;
@@ -121,8 +122,8 @@
             color: #ffffff;
         }
         .loader {
-            border: 16px solid #f3f3f3; /* Light gray */
-            border-top: 16px solid #1e2a38; /* Dark blue */
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #1e2a38;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -142,7 +143,7 @@
             }
         }
         .reset-btn {
-            background-color: #e53935; /* Red button */
+            background-color: #e53935;
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -151,12 +152,12 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .reset-btn:hover {
-            background-color: #c62828; /* Darker red on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #c62828;
+            transform: scale(1.05);
         }
         .reset-btn:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5);
         }
     </style>
 </head>
@@ -211,32 +212,33 @@ function calculateFrequency() {
         }
 
         // Frequency Distribution Calculation
-        const min = Math.min(...data);
-        const max = Math.max(...data);
-        const bins = Math.ceil(max - min + 1); // Number of bins (adjust as needed)
-        const binSize = (max - min) / bins;
-
         const frequency = {};
         const cumulativeFrequency = {};
         let cumulativeCount = 0;
 
-        for (let i = min; i <= max; i++) {
-            frequency[i] = 0;
-            cumulativeFrequency[i] = 0;
-        }
-
+        // Initialize frequency and cumulative frequency counts
         data.forEach(num => {
+            if (!frequency[num]) {
+                frequency[num] = 0;
+                cumulativeFrequency[num] = 0;
+            }
             frequency[num]++;
-            cumulativeCount++;
-            cumulativeFrequency[num] = cumulativeCount;
+        });
+
+        // Sort the unique values and calculate cumulative frequency
+        const sortedValues = Object.keys(frequency).map(Number).sort((a, b) => a - b);
+
+        sortedValues.forEach(value => {
+            cumulativeCount += frequency[value]; // Increment cumulative count
+            cumulativeFrequency[value] = cumulativeCount; // Update cumulative frequency
         });
 
         // Display Frequency Table
         let output = `<h3>Frequency Distribution:</h3><table><tr><th>Value</th><th>Frequency</th><th>Relative Frequency</th><th>Cumulative Frequency</th></tr>`;
-        for (let value in frequency) {
+        sortedValues.forEach(value => {
             const relFreq = (frequency[value] / data.length).toFixed(2);
             output += `<tr><td>${value}</td><td>${frequency[value]}</td><td>${relFreq}</td><td>${cumulativeFrequency[value]}</td></tr>`;
-        }
+        });
         output += `</table>`;
         
         document.getElementById('output').innerHTML = output;
@@ -252,5 +254,3 @@ function resetFields() {
 
 </body>
 </html>
-
-
