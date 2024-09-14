@@ -215,6 +215,7 @@ function calculateFrequency() {
         const frequency = {};
         const cumulativeFrequency = {};
         let cumulativeCount = 0;
+        const totalObservations = data.length; // Correct total number of observations
 
         // Initialize frequency and cumulative frequency counts
         data.forEach(num => {
@@ -236,14 +237,14 @@ function calculateFrequency() {
         // Display Frequency Table
         let output = `<h3>Frequency Distribution:</h3><table><tr><th>Value</th><th>Frequency</th><th>Relative Frequency</th><th>Cumulative Frequency</th></tr>`;
         sortedValues.forEach(value => {
-            const relFreq = (frequency[value] / data.length).toFixed(2);
+            const relFreq = (frequency[value] / totalObservations).toFixed(2); // Correctly divide by totalObservations
             output += `<tr><td>${value}</td><td>${frequency[value]}</td><td>${relFreq}</td><td>${cumulativeFrequency[value]}</td></tr>`;
         });
         output += `</table>`;
         
         document.getElementById('output').innerHTML = output;
         loader.style.display = 'none'; // Hide loading spinner
-    }, 500); // Simulate 500ms delay
+    }, 500); // Simulate delay for user experience
 }
 
 function resetFields() {
@@ -254,3 +255,4 @@ function resetFields() {
 
 </body>
 </html>
+
