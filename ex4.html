@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discrete Data Mean Deviation Experiment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9f9; /* Light gray background */
+            color: #333333; /* Dark gray text */
+            margin: 20px;
+        }
+        textarea, input, button {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 2px solid #1e2a38; /* Dark blue border */
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #ffffff; /* White background for textarea */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #1e2a38; /* Dark blue button */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #142028; /* Darker blue on hover */
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+        }
+        .output {
+            margin-top: 20px;
+        }
+        .section {
+            border: 2px solid #1e2a38; /* Dark blue border */
+            background-color: #ffffff; /* White background for sections */
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .section h3 {
+            margin-top: 0;
+            background-color: #1e2a38; /* Dark blue header background */
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .content div {
+            flex: 1;
+            min-width: 250px; /* Minimum width for responsiveness */
+            margin: 0 10px;
+            border: 2px solid #1e2a38; /* Dark blue border */
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9f9; /* Light gray background for content boxes */
+            transition: background-color 0.3s ease;
+        }
+        .content div:hover {
+            background-color: #e0e0e0; /* Slightly darker gray on hover */
+        }
+        .content h4 {
+            color: #1e2a38;
+            text-align: center;
+        }
+        .loader {
+            border: 16px solid #f3f3f3; /* Light gray */
+            border-top: 16px solid #1e2a38; /* Dark blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="color: #1e2a38;">Discrete Data Mean Deviation Experiment</h1>
+<p>Enter discrete data values as X, Frequency (F), separated by commas:</p>
+<textarea id="inputDataDiscrete" placeholder="e.g., 1:2, 2:3, 3:5, 4:1"></textarea>
+<br>
+<button onclick="calculateMeanDiscrete()">Calculate Mean & MDME</button>
+<button onclick="resetFields()">Reset</button>
+
+<div class="loader" id="loaderDiscrete" style="display: none;"></div>
+<div class="output" id="outputDiscrete"></div>
+
+<div class="section">
+    <h3>Discrete Data Analysis</h3>
+    <div class="content">
+        <div>
+            <h4>Formula</h4>
+            <p><strong>Mean:</strong> Formula for Mean: (Sum of all X values multiplied by their frequencies) / (Sum of all frequencies).</p>
+            <p><strong>MDME:</strong> Formula: (Sum of absolute deviations from the Mean multiplied by frequencies) / (Sum of frequencies).</p>
+        </div>
+        <div>
+            <h4>Calculation Process</h4>
+            <p>1. Calculate the Mean by multiplying each X value by its frequency, summing the results, and dividing by the sum of the frequencies.</p>
+            <p>2. Compute the Mean Deviation (MDME) by finding the absolute deviations of each X value from the Mean, multiplying by the frequencies, summing them, and dividing by the total sum of the frequencies.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateMeanDiscrete() {
+    const loader = document.getElementById('loaderDiscrete');
+    loader.style.display = 'block'; // Show loading spinner
+
+    setTimeout(() => { // Simulate delay
+        const data = document.getElementById('inputDataDiscrete').value
+            .split(',')
+            .map(entry => entry.split(':').map(Number))
+            .filter(([x, f]) => !isNaN(x) && !isNaN(f));
+        
+        if (data.length === 0) {
+            document.getElementById('outputDiscrete').innerHTML = 'Please enter valid data.';
+            loader.style.display = 'none';
+            return;
+        }
+
+        const totalF = data.reduce((acc, [x, f]) => acc + f, 0);
+        const LCF = [];
+        let cumulativeF = 0;
+        data.forEach(([x, f]) => {
+            cumulativeF += f;
+            LCF.push(cumulativeF);
+        });
+
+        const N = totalF;
+        const medianPos = N / 2;
+        const medianIndex = LCF.findIndex(val => val >= medianPos);
+        const [Me] = data[medianIndex];
+
+        const MDME = data.reduce((acc, [x, f]) => acc + Math.abs(x - Me) * f, 0) / totalF;
+        const output = `<h3>Calculation Results:</h3>
+                        <p><strong>Mean (Me):</strong> ${Me}</p>
+                        <p><strong>Mean Deviation (MDME):</strong> ${MDME}</p>`;
+        document.getElementById('outputDiscrete').innerHTML = output;
+        loader.style.display = 'none';
+    }, 1000); // Simulate a 1-second calculation
+}
+
+function resetFields() {
+    document.getElementById('inputDataDiscrete').value = '';
+    document.getElementById('outputDiscrete').innerHTML = '';
+    document.getElementById('loaderDiscrete').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
+
+
