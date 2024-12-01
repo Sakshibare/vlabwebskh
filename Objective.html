@@ -18,23 +18,122 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 </head>
 <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
-    <!-- Navbar -->
+     <!-- navbar -->
     <header class="vlabs-header sticky-top bg-white">
-        <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
-            <button class="navbar-toggler px-4" type="button" onclick="toggle()">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="d-flex justify-content-center">
-                <a href="#" class="navbar-brand">
-                    <img src="logo.jpg" alt="vlabs logo" class="vlabs-logo" height="100" width="100">
-                </a>
-            </div>
-        </nav>
+      <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
+        <button class="navbar-toggler px-4" type="button" onclick="toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="d-flex justify-content-center">
+          <a href="https://vlab.co.in" class="navbar-brand">
+            <img src="logo.jpg"   height="100" width="100"  alt="vlabs logo" class="vlabs-logo">
+          </a>
+        </div>
+  
+        <div id="headerNavbar" class="d-none border-top flex-grow-1 d-lg-flex align-items-center"><ul class="navbar-nav ml-auto text-center d-flex flex-md-row">
+      <li class="vl-rating-display">
+          <rating-display spreadsheetid="1x12nhpp0QvnsA6x-O1sV4IA9SAbfVsq_wiexWkutOmU" sheetname="Lab-Clean" columnname="Lab Name" columnvalue="Python Programming Lab" imagesdirectory="https://virtual-labs.github.io/svc-rating/"></rating-display>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in">HOME</a>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in/participating-institutes">PARTNERS</a>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in/contact-us">CONTACT</a>
+      </li>
+  </ul></div>
+      </nav>
     </header>
   
     <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
+      <div class="row py-4 px-4 breadcrumbs"><a href="https://www.vlab.co.in/broad-area-computer-science-and-engineering" class="sidebar-a">
+      Computer Science and Engineering
+  </a></div>
+      <div class="row flex-grow-1 d-flex flex-nowrap">
+        <div class="modal fade popupmenu" id="popupMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- popup menu -->
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <a href="https://vlab.co.in" class="navbar-brand">
+                    <img src="logo.jpg" alt="vlabs logo" class="vlabs-logo">
+                  </a>
+                </h5>
+                <button type="button" class="btn-close align-self-center" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body nav-menu popupMenuItems" id="popupMenuItems">  <div class="d-flex nav-menu-body">
+      <a href="index.html" class="p-2">	
+        Introduction	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Objective.html" class="p-2">	
+        Objective	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="experiments.html" class="p-2">	
+        List of experiments	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Target Audience.html" class="p-2">	
+        Target Audience	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Course Alignment.html" class="p-2">	
+        Course Alignment	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Feedback.html" class="p-2">	
+        Feedback	
+      </a>
+    </div>
+  </div>
+ </div>
+ </div>
+</div>
+   <div class="nav flex-column sidebar nav-menu flex-shrink-0 px-lg-4 align-items-center align-items-lg-start hidden d-none d-lg-flex" id="menu">  <div class="d-flex nav-menu-body">
+      <a href="index.html" class="p-2">	
+        Introduction	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Objective.html" class="p-2">	
+        Objective	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="experiments.html" class="p-2">	
+        List of experiments	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Target Audience.html" class="p-2">	
+        Target Audience	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Course Alignment.html" class="p-2">	
+        Course Alignment	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Feedback.html" class="p-2">	
+        Feedback	
+      </a>
+    </div>
+  </div>
+  
+    <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
         <div class="row py-4 px-4 breadcrumbs">
-            <a href="#" class="sidebar-a">Virtual Lab DRC Experiments..</a>
+            <a href="#" class="sidebar-a">Virtual Lab Statistics Experiments..</a>
         </div>
         <div class="row flex-grow-1 d-flex flex-nowrap">
             <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
