@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ungrouped Data Mean Deviation Experiment</title>
+    <title>Ungrouped Data Median Deviation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -98,11 +98,11 @@
 </head>
 <body>
 
-<h1 style="color: #1e2a38;">Ungrouped Data Mean Deviation Experiment</h1>
+<h1 style="color: #1e2a38;">Ungrouped Data Median Deviation Experiment</h1>
 <p>Enter ungrouped data values separated by commas:</p>
 <textarea id="inputDataUngrouped" placeholder="e.g., 1, 2, 2, 3, 3, 3, 4, 4, 4, 4"></textarea>
 <br>
-<button onclick="calculateMeanUngrouped()">Calculate Mean & MDME</button>
+<button onclick="calculateMedianUngrouped()">Calculate Mean & MDME</button>
 <button onclick="resetFields()">Reset</button>
 
 <div class="loader" id="loaderUngrouped" style="display: none;"></div>
@@ -113,19 +113,19 @@
     <div class="content">
         <div>
             <h4>Formula</h4>
-            <p><strong>Mean:</strong> Formula for Mean: (Sum of all values) / (Total number of values).</p>
-            <p><strong>MDME:</strong> Formula: (Sum of absolute deviations from the Mean) / (Total number of values).</p>
+            <p><strong>Median:</strong> Formula for Median: (Sum of all values) / (Total number of values).</p>
+            <p><strong>MDME:</strong> Formula: (Sum of absolute deviations from the Median) / (Total number of values).</p>
         </div>
         <div>
             <h4>Calculation Process</h4>
-            <p>1. Calculate the Mean by summing all values and dividing by the total number of values.</p>
-            <p>2. Compute the Mean Deviation (MDME) by finding the absolute deviations of each value from the Mean, summing them, and dividing by the total number of values.</p>
+            <p>1. Calculate the Median by summing all values and dividing by the total number of values.</p>
+            <p>2. Compute the Mean Deviation (MDME) by finding the absolute deviations of each value from the Median, summing them, and dividing by the total number of values.</p>
         </div>
     </div>
 </div>
 
 <script>
-function calculateMeanUngrouped() {
+function calculateMedianUngrouped() {
     const loader = document.getElementById('loaderUngrouped');
     loader.style.display = 'block'; // Show loading spinner
 
@@ -153,8 +153,8 @@ function calculateMeanUngrouped() {
 
         const MDME = data.reduce((acc, val) => acc + Math.abs(val - Me), 0) / N;
         const output = `<h3>Calculation Results:</h3>
-                        <p><strong>Mean (Me):</strong> ${Me}</p>
-                        <p><strong>Mean Deviation (MDME):</strong> ${MDME}</p>`;
+                        <p><strong>Median (Me):</strong> ${Me}</p>
+                        <p><strong>Median Deviation (MDME):</strong> ${MDME}</p>`;
         document.getElementById('outputUngrouped').innerHTML = output;
         loader.style.display = 'none';
     }, 1000); // Simulate a 1-second calculation

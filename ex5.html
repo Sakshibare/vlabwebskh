@@ -102,7 +102,7 @@
 <p>Enter continuous data as Class Intervals, Frequency (F), separated by commas:</p>
 <textarea id="inputDataContinuous" placeholder="e.g., 0-10:2, 10-20:5, 20-30:3"></textarea>
 <br>
-<button onclick="calculateMeanContinuous()">Calculate Mean & MDME</button>
+<button onclick="calculateMeanContinuous()">Calculate Median & MDME</button>
 <button onclick="resetFields()">Reset</button>
 
 <div class="loader" id="loaderContinuous" style="display: none;"></div>
@@ -113,13 +113,13 @@
     <div class="content">
         <div>
             <h4>Formula</h4>
-            <p><strong>Mean:</strong> (Sum of midpoints of intervals multiplied by their frequencies) / (Sum of frequencies).</p>
-            <p><strong>MDME:</strong> (Sum of absolute deviations from the Mean multiplied by frequencies) / (Sum of frequencies).</p>
+            <p><strong>Median:</strong> (Sum of midpoints of intervals multiplied by their frequencies) / (Sum of frequencies).</p>
+            <p><strong>MDME:</strong> (Sum of absolute deviations from the Median multiplied by frequencies) / (Sum of frequencies).</p>
         </div>
         <div>
             <h4>Calculation Process</h4>
-            <p>1. Calculate the Mean by multiplying each midpoint of intervals by its frequency, summing the results, and dividing by the sum of frequencies.</p>
-            <p>2. Compute the MDME by finding the absolute deviations from the Mean, multiplying by frequencies, summing them, and dividing by the sum of frequencies.</p>
+            <p>1. Calculate the Median by multiplying each midpoint of intervals by its frequency, summing the results, and dividing by the sum of frequencies.</p>
+            <p>2. Compute the MDME by finding the absolute deviations from the Median, multiplying by frequencies, summing them, and dividing by the sum of frequencies.</p>
         </div>
     </div>
 </div>
