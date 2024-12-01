@@ -151,7 +151,7 @@ function calculateMeanContinuous() {
 
         const MDME = data.reduce((acc, { L, U, F }) => acc + F * Math.abs((L + U) / 2 - mean), 0) / totalF;
         const output = `<h3>Calculation Results:</h3>
-                        <p><strong>Mean:</strong> ${mean}</p>
+                        <p><strong>Median:</strong> ${mean}</p>
                         <p><strong>Mean Deviation (MDME):</strong> ${MDME}</p>`;
         document.getElementById('outputContinuous').innerHTML = output;
         loader.style.display = 'none';
