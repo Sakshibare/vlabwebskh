@@ -22,47 +22,121 @@
 <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
    
 
-  <!-- navbar -->
-  <header class="vlabs-header sticky-top bg-white">
-    <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
-      <button class="navbar-toggler px-4" type="button" onclick="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="d-flex justify-content-center">
-        <a href="index.html" class="navbar-brand">
-          <img src="logo.jpg" alt="vlabs logo" class="vlabs-logo" height="100" width="100">
-        </a>
-      </div>
-
-      <div id="headerNavbar" class="d-none border-top flex-grow-1 d-lg-flex align-items-center">
-        <ul class="navbar-nav ml-auto text-center d-flex flex-md-row">
-          <li class="nav-item px-2 m-1">
-            <a href="index.html">HOME</a>
-          </li>
-          <li class="nav-item px-2 m-1">
-            <a href="Objective.html">OBJECTIVE</a>
-          </li>
-          <li class="nav-item px-2 m-1">
-            <a href="experiments.html">EXPERIMENTS</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-  <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
-    <div class="row py-4 px-4 breadcrumbs">
-      <a href="experiments.html" class="sidebar-a">Statistics Virtual Lab Experiments</a>
+   <!-- navbar -->
+    <header class="vlabs-header sticky-top bg-white">
+      <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
+        <button class="navbar-toggler px-4" type="button" onclick="toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="d-flex justify-content-center">
+          <a href="https://vlab.co.in" class="navbar-brand">
+            <img src="logo.jpg"   height="100" width="100"  alt="vlabs logo" class="vlabs-logo">
+          </a>
+        </div>
+  
+        <div id="headerNavbar" class="d-none border-top flex-grow-1 d-lg-flex align-items-center"><ul class="navbar-nav ml-auto text-center d-flex flex-md-row">
+      <li class="vl-rating-display">
+          <rating-display spreadsheetid="1x12nhpp0QvnsA6x-O1sV4IA9SAbfVsq_wiexWkutOmU" sheetname="Lab-Clean" columnname="Lab Name" columnvalue="Python Programming Lab" imagesdirectory="https://virtual-labs.github.io/svc-rating/"></rating-display>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in">HOME</a>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in/participating-institutes">PARTNERS</a>
+      </li>
+      <li class="nav-item px-2 m-1">
+          <a href="https://vlab.co.in/contact-us">CONTACT</a>
+      </li>
+  </ul></div>
+      </nav>
+    </header>
+  
+    <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
+      <div class="row py-4 px-4 breadcrumbs"><a href="https://www.vlab.co.in/broad-area-computer-science-and-engineering" class="sidebar-a">
+      Computer Science and Engineering
+  </a></div>
+      <div class="row flex-grow-1 d-flex flex-nowrap">
+        <div class="modal fade popupmenu" id="popupMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <!-- popup menu -->
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <a href="https://vlab.co.in" class="navbar-brand">
+                    <img src="logo.jpg" alt="vlabs logo" class="vlabs-logo">
+                  </a>
+                </h5>
+                <button type="button" class="btn-close align-self-center" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body nav-menu popupMenuItems" id="popupMenuItems">  <div class="d-flex nav-menu-body">
+      <a href="index.html" class="p-2">	
+        Introduction	
+      </a>
     </div>
-    <div class="row flex-grow-1 d-flex flex-nowrap">
-      <div class="vlabs-page-content px-5 pb-4 flex-grow-1 markdown-body">
-        <span class="lab-name">
-          <h2 class="text-center">Statistics Virtual Lab</h2>
-        </span>
-        <div>
-          <div>
-            <h1>Statistics Virtual Lab Experiments</h1>
+    <div class="d-flex nav-menu-body">
+      <a href="Objective.html" class="p-2">	
+        Objective	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="experiments.html" class="p-2">	
+        List of experiments	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Target Audience.html" class="p-2">	
+        Target Audience	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Course Alignment.html" class="p-2">	
+        Course Alignment	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Feedback.html" class="p-2">	
+        Feedback	
+      </a>
+    </div>
+  </div>
+ </div>
+ </div>
+</div>
+   <div class="nav flex-column sidebar nav-menu flex-shrink-0 px-lg-4 align-items-center align-items-lg-start hidden d-none d-lg-flex" id="menu">  <div class="d-flex nav-menu-body">
+      <a href="index.html" class="p-2">	
+        Introduction	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Objective.html" class="p-2">	
+        Objective	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="experiments.html" class="p-2">	
+        List of experiments	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Target Audience.html" class="p-2">	
+        Target Audience	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Course Alignment.html" class="p-2">	
+        Course Alignment	
+      </a>
+    </div>
+    <div class="d-flex nav-menu-body">
+      <a href="Feedback.html" class="p-2">	
+        Feedback	
+      </a>
+    </div>
+  </div>
+  <div>
+     <div>
+           <h1>Statistics Virtual Lab Experiments</h1>
           </div>
           <p>Statistics refers to the methods used to store, process, and transmit data in various formats. This can include digital formats used by computers, smartphones, and other electronic devices. Data is typically represented using bits (0s and 1s), which are processed by electronic circuits to perform various operations. Effective Statistics is crucial for ensuring that information is accurately and efficiently handled.</p>
           <p>Data Condensation involves summarizing large datasets into more manageable forms. This process includes the classification and tabulation of data, making it easier to analyze and interpret. Data can be categorized into primary and secondary types, and further classified into discrete and continuous variables. Graphical representations such as histograms, ogive curves, and stem-and-leaf charts are often used to visualize condensed data. The goal of data condensation is to highlight essential information while minimizing unnecessary details, facilitating easier comparison and statistical analysis.</p>
