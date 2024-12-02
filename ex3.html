@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ungrouped Data Median Deviation Experiment</title>
+    <title>Ungrouped Data Mean Deviation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,6 +39,12 @@
         button:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+        }
+        #resetButton {
+            background-color: red; /* Red color for reset button */
+        }
+        #resetButton:hover {
+            background-color: darkred; /* Darker red on hover */
         }
         .output {
             margin-top: 20px;
@@ -98,12 +104,12 @@
 </head>
 <body>
 
-<h1 style="color: #1e2a38;">Ungrouped Data Median Deviation Experiment</h1>
+<h1 style="color: #1e2a38;">Ungrouped Data Mean Deviation Experiment</h1>
 <p>Enter ungrouped data values separated by commas:</p>
 <textarea id="inputDataUngrouped" placeholder="e.g., 1, 2, 2, 3, 3, 3, 4, 4, 4, 4"></textarea>
 <br>
 <button onclick="calculateMedianUngrouped()">Calculate Median & MDME</button>
-<button onclick="resetFields()">Reset</button>
+<button id="resetButton" onclick="resetFields()">Reset</button>
 
 <div class="loader" id="loaderUngrouped" style="display: none;"></div>
 <div class="output" id="outputUngrouped"></div>
@@ -130,8 +136,17 @@ function calculateMedianUngrouped() {
     loader.style.display = 'block'; // Show loading spinner
 
     setTimeout(() => { // Simulate delay
-        const data = document.getElementById('inputDataUngrouped').value
-            .split(',')
+        const input = document.getElementById('inputDataUngrouped').value;
+        // Regex for valid comma-separated numbers
+        const regex = /^[\d]+(,\s?[\d]+)*$/;
+
+        if (!regex.test(input)) {
+            alert("Please enter valid comma-separated numbers without extra spaces or commas."); // Error pop-up
+            loader.style.display = 'none';
+            return;
+        }
+
+        const data = input.split(',')
             .map(Number)
             .filter(n => !isNaN(n)); // Convert input to numbers and filter invalid entries
 
@@ -169,6 +184,7 @@ function resetFields() {
 
 </body>
 </html>
+
 
 
 
