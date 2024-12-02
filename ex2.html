@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9f9; /* Light gray background */
-            color: #333333; /* Dark gray text */
+            background-color: #f8f9f9;
+            color: #333333;
             margin: 20px;
         }
         textarea, input, button {
@@ -18,14 +18,14 @@
         textarea {
             width: 100%;
             height: 100px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #1e2a38;
             border-radius: 5px;
             padding: 10px;
-            background-color: #ffffff; /* White background for textarea */
+            background-color: #ffffff;
         }
         button {
             padding: 10px 20px;
-            background-color: #1e2a38; /* Dark blue button */
+            background-color: #1e2a38;
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -33,12 +33,12 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #142028; /* Darker blue on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #142028;
+            transform: scale(1.05);
         }
         button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5);
         }
         .tooltip {
             position: relative;
@@ -47,14 +47,14 @@
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 120px;
-            background-color: #1e2a38; /* Dark blue background */
-            color: #ffffff; /* White text */
+            background-color: #1e2a38;
+            color: #ffffff;
             text-align: center;
             border-radius: 5px;
             padding: 5px 0;
             position: absolute;
             z-index: 1;
-            bottom: 125%; /* Above the button */
+            bottom: 125%;
             left: 50%;
             margin-left: -60px;
             opacity: 0;
@@ -68,15 +68,15 @@
             margin-top: 20px;
         }
         .section {
-            border: 2px solid #1e2a38; /* Dark blue border */
-            background-color: #ffffff; /* White background for sections */
+            border: 2px solid #1e2a38;
+            background-color: #ffffff;
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
         }
         .section h3 {
             margin-top: 0;
-            background-color: #1e2a38; /* Dark blue header background */
+            background-color: #1e2a38;
             color: #ffffff;
             padding: 10px;
             border-radius: 5px 5px 0 0;
@@ -84,22 +84,22 @@
         }
         .content {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
         }
         .content div {
             flex: 1;
-            min-width: 250px; /* Minimum width for responsiveness */
+            min-width: 250px;
             margin: 0 10px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #1e2a38;
             padding: 10px;
             border-radius: 5px;
-            background-color: #f8f9f9; /* Light gray background for content boxes */
+            background-color: #f8f9f9;
             transition: background-color 0.3s ease;
         }
         .content div:hover {
-            background-color: #e0e0e0; /* Slightly darker gray on hover */
+            background-color: #e0e0e0;
         }
         .content h4 {
             color: #1e2a38;
@@ -121,8 +121,8 @@
             color: #ffffff;
         }
         .loader {
-            border: 16px solid #f3f3f3; /* Light gray */
-            border-top: 16px solid #1e2a38; /* Dark blue */
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #1e2a38;
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -142,7 +142,7 @@
             }
         }
         .reset-btn {
-            background-color: #e53935; /* Red button */
+            background-color: #e53935;
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -151,12 +151,26 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .reset-btn:hover {
-            background-color: #c62828; /* Darker red on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #c62828;
+            transform: scale(1.05);
         }
         .reset-btn:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5);
+        }
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -193,51 +207,65 @@
     </div>
 </div>
 
+<div class="error-popup" id="errorPopup">Please enter valid numbers with exactly one comma between them (e.g., 1, 2, 3).</div>
+
 <script>
 function calculateCentralTendency() {
     const loader = document.getElementById('loader');
     loader.style.display = 'block'; // Show loading spinner
 
     setTimeout(() => { // Simulate delay
-        const data = document.getElementById('inputData').value
+        const dataInput = document.getElementById('inputData').value;
+        
+        // Validate input: Check for valid format (only numbers and single commas, no extra commas)
+        const validInput = /^[\d]+(,\s?[\d]+)*$/.test(dataInput); // regex to allow numbers with exactly one comma between them
+
+        if (!validInput) {
+            document.getElementById('errorPopup').style.display = 'block'; // Show error popup
+            setTimeout(() => {
+                document.getElementById('errorPopup').style.display = 'none'; // Hide error popup after 3 seconds
+            }, 3000);
+            loader.style.display = 'none'; // Hide loading spinner
+            return;
+        }
+
+        const data = dataInput
             .split(',')
             .map(Number)
             .filter(n => !isNaN(n)); // Convert input to numbers and filter invalid entries
 
         if (data.length === 0) {
-            document.getElementById('output').innerText = "Please enter valid numbers.";
+            document.getElementById('errorPopup').style.display = 'block'; // Show error popup for empty input
+            setTimeout(() => {
+                document.getElementById('errorPopup').style.display = 'none'; // Hide error popup after 3 seconds
+            }, 3000);
             loader.style.display = 'none'; // Hide loading spinner
             return;
         }
 
-        // Central Tendency Calculation
-        const mean = (data.reduce((a, b) => a + b, 0) / data.length).toFixed(2);
+        const sum = data.reduce((acc, num) => acc + num, 0);
+        const mean = (sum / data.length).toFixed(2);
 
+        // Sort data for median calculation
         data.sort((a, b) => a - b);
         const mid = Math.floor(data.length / 2);
         const median = data.length % 2 === 0 ? ((data[mid - 1] + data[mid]) / 2).toFixed(2) : data[mid].toFixed(2);
 
+        // Calculate mode
         const frequency = {};
         data.forEach(num => frequency[num] = (frequency[num] || 0) + 1);
-        const maxFrequency = Math.max(...Object.values(frequency));
-        const mode = Object.keys(frequency).filter(key => frequency[key] === maxFrequency);
+        const mode = Object.keys(frequency).reduce((a, b) => frequency[a] > frequency[b] ? a : b);
 
-        // Display Central Tendency Results
-        const modeStr = mode.length === data.length ? 'No mode' : mode.join(', ');
-
-        let output = `
-            <h3>Results:</h3>
-            <table>
-                <tr><th>Measure</th><th>Value</th></tr>
-                <tr><td>Mean</td><td>${mean}</td></tr>
-                <tr><td>Median</td><td>${median}</td></tr>
-                <tr><td>Mode</td><td>${modeStr}</td></tr>
-            </table>
+        const output = `
+            <h2>Results</h2>
+            <p><strong>Mean:</strong> ${mean}</p>
+            <p><strong>Median:</strong> ${median}</p>
+            <p><strong>Mode:</strong> ${mode}</p>
         `;
-        
         document.getElementById('output').innerHTML = output;
+
         loader.style.display = 'none'; // Hide loading spinner
-    }, 500); // Simulate 500ms delay
+    }, 1500); // Simulate loading time
 }
 
 function resetFields() {
