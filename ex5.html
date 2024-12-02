@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-scale, initial-scale=1.0">
     <title>Continuous Data Mean Deviation Experiment</title>
     <style>
         body {
@@ -25,7 +25,6 @@
         }
         button {
             padding: 10px 20px;
-            background-color: #337ab7; /* Blue button */
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -33,12 +32,23 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #285e8e; /* Darker blue on hover */
             transform: scale(1.05); /* Slightly enlarge button on hover */
         }
         button:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.5); /* Focus shadow */
+        }
+        .blue-button {
+            background-color: #337ab7; /* Blue button */
+        }
+        .blue-button:hover {
+            background-color: #285e8e; /* Darker blue on hover */
+        }
+        .red-button {
+            background-color: #d9534f; /* Red button */
+        }
+        .red-button:hover {
+            background-color: #c9302c; /* Darker red on hover */
         }
         .output {
             margin-top: 20px;
@@ -99,11 +109,11 @@
 <body>
 
 <h1 style="color: #337ab7;">Continuous Data Mean Deviation Experiment</h1>
-<p>Enter continuous data as Class Intervals, Frequency (F), separated by commas:</p>
+<p>Enter continuous data as Class Intervals, Frequency (F), separated by commas. Example: 0-10:2, 10-20:5, 20-30:3</p>
 <textarea id="inputDataContinuous" placeholder="e.g., 0-10:2, 10-20:5, 20-30:3"></textarea>
 <br>
-<button onclick="calculateMeanContinuous()">Calculate Median & MDME</button>
-<button onclick="resetFields()">Reset</button>
+<button onclick="calculateMeanContinuous()" class="blue-button">Calculate Median & MDME</button>
+<button onclick="resetFields()" class="red-button">Reset</button>
 
 <div class="loader" id="loaderContinuous" style="display: none;"></div>
 <div class="output" id="outputContinuous"></div>
@@ -129,8 +139,19 @@ function calculateMeanContinuous() {
     const loader = document.getElementById('loaderContinuous');
     loader.style.display = 'block'; // Show loading spinner
 
+    const input = document.getElementById('inputDataContinuous').value.trim();
+    
+    // Regular expression to match valid format: e.g., "0-10:2, 10-20:5"
+    const regex = /^(\d+-\d+:\d+)(,(\d+-\d+:\d+))*$/;
+
+    if (!regex.test(input)) {
+        alert('Invalid input format. Please follow the format: "0-10:2, 10-20:5, 20-30:3"');
+        loader.style.display = 'none';
+        return;
+    }
+
     setTimeout(() => { // Simulate delay
-        const data = document.getElementById('inputDataContinuous').value
+        const data = input
             .split(',')
             .map(entry => {
                 const [interval, f] = entry.split(':');
@@ -139,12 +160,6 @@ function calculateMeanContinuous() {
             })
             .filter(({ L, U, F }) => !isNaN(L) && !isNaN(U) && !isNaN(F));
         
-        if (data.length === 0) {
-            document.getElementById('outputContinuous').innerHTML = 'Please enter valid data.';
-            loader.style.display = 'none';
-            return;
-        }
-
         const totalF = data.reduce((acc, { F }) => acc + F, 0);
         const weightedMidpointSum = data.reduce((acc, { L, U, F }) => acc + ((L + U) / 2) * F, 0);
         const mean = weightedMidpointSum / totalF;
@@ -167,4 +182,3 @@ function resetFields() {
 
 </body>
 </html>
-
