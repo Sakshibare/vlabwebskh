@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discrete Data Median Deviation Experiment</title>
+    <title>Discrete Data Mean Deviation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,6 +39,12 @@
         button:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+        }
+        #resetButton {
+            background-color: red; /* Red color for reset button */
+        }
+        #resetButton:hover {
+            background-color: darkred; /* Darker red on hover */
         }
         .output {
             margin-top: 20px;
@@ -103,7 +109,7 @@
 <textarea id="inputDataDiscrete" placeholder="e.g., 1:2, 2:3, 3:5, 4:1"></textarea>
 <br>
 <button onclick="calculateMedianDiscrete()">Calculate Median & MDME</button>
-<button onclick="resetFields()">Reset</button>
+<button id="resetButton" onclick="resetFields()">Reset</button>
 
 <div class="loader" id="loaderDiscrete" style="display: none;"></div>
 <div class="output" id="outputDiscrete"></div>
@@ -130,11 +136,20 @@ function calculateMedianDiscrete() {
     loader.style.display = 'block'; // Show loading spinner
 
     setTimeout(() => { // Simulate delay
-        const data = document.getElementById('inputDataDiscrete').value
-            .split(',')
+        const input = document.getElementById('inputDataDiscrete').value;
+        // Regex for valid discrete data format (e.g., 1:2, 2:3, 3:5)
+        const regex = /^[\d]+:[\d]+(,\s?[\d]+:[\d]+)*$/;
+
+        if (!regex.test(input)) {
+            alert("Please enter valid data in the format 'X:F' (e.g., 1:2, 2:3, 3:5)."); // Error pop-up
+            loader.style.display = 'none';
+            return;
+        }
+
+        const data = input.split(',')
             .map(entry => entry.split(':').map(Number))
             .filter(([x, f]) => !isNaN(x) && !isNaN(f));
-        
+
         if (data.length === 0) {
             document.getElementById('outputDiscrete').innerHTML = 'Please enter valid data.';
             loader.style.display = 'none';
