@@ -24,11 +24,6 @@ An interactive platform offering hands-on experiments to simplify complex concep
 - Data Representation & Condensation.  
 - C++ Programming Concepts.
 
----
-
-### 🌟 Acknowledgments  
-- Thanks to **Suyash** for resolving project issues.  
-- Gratitude to **Sham** for identifying critical errors.
 
 ---
 
