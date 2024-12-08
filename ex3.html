@@ -3,175 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mean Deviation Experiment</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #FFFFFF; /* White background */
-            color: #2C3E50; /* Dark navy text */
-            margin: 20px;
-        }
-        textarea, input, button {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-            border: 2px solid #D4EFDF; /* Pastel green border */
-            border-radius: 5px;
-            padding: 10px;
-            background-color: #ffffff; /* White background for textarea */
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #2C3E50; /* Dark navy button */
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        button:hover {
-            background-color: #1A252F; /* Darker navy on hover */
-            transform: scale(1.05);
-        }
-        button:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5);
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: #2C3E50; /* Dark navy tooltip */
-            color: #ffffff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        .output {
-            margin-top: 20px;
-        }
-        .section {
-            border: 2px solid #D4EFDF; /* Pastel green border */
-            background-color: #ffffff;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-        .section h3 {
-            color: #2C3E50; /* Dark navy text */
-            font-size: 18px;
-            border-bottom: 2px solid #D4EFDF; /* Underline in pastel green */
-            text-align: center;
-            padding-bottom: 5px;
-        }
+    <title> Ungrouped Data Mean Deviation Experiment</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFFF; /* White background */
+        color: #2C3E50; /* Dark navy text */
+        margin: 20px;
+    }
+    textarea, input, button {
+        font-size: 16px;
+        margin: 10px 0;
+    }
+    textarea {
+        width: 100%;
+        height: 100px;
+        border: 2px solid #D4EFDF; /* Pastel green border */
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #ffffff; /* White background for textarea */
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #2C3E50; /* Dark navy button */
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+        background-color: #1A252F; /* Darker navy on hover */
+        transform: scale(1.05);
+    }
+    button:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5);
+    }
+    .tooltip {
+        position: relative;
+        display: inline-block;
+    }
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #2C3E50; /* Dark navy tooltip */
+        color: #ffffff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+    .output {
+        margin-top: 20px;
+    }
+    .section {
+        border: 2px solid #D4EFDF; /* Pastel green border */
+        background-color: #ffffff;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+    .section h3 {
+        color: #2C3E50; /* Dark navy text */
+        font-size: 18px;
+        border-bottom: 2px solid #D4EFDF; /* Underline in pastel green */
+        text-align: center;
+        padding-bottom: 5px;
+    }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .content div {
+        flex: 1;
+        min-width: 250px;
+        margin: 0 10px;
+        border: 2px solid #D4EFDF; /* Pastel green border */
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f8f9f9;
+        transition: background-color 0.3s ease;
+    }
+    .content div:hover {
+        background-color: #e0e0e0;
+    }
+    .content h4 {
+        color: #2C3E50; /* Dark navy text */
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 10px;
+    }
+    table, th, td {
+        border: 2px solid #D4EFDF; /* Pastel green border */
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        background-color: #2C3E50; /* Dark navy header */
+        color: #ffffff;
+    }
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #2C3E50; /* Dark navy loader */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @media (max-width: 768px) {
         .content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 20px;
+            flex-direction: column;
         }
         .content div {
-            flex: 1;
-            min-width: 250px;
-            margin: 0 10px;
-            border: 2px solid #D4EFDF; /* Pastel green border */
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f8f9f9;
-            transition: background-color 0.3s ease;
+            margin: 10px 0;
         }
-        .content div:hover {
-            background-color: #e0e0e0;
-        }
-        .content h4 {
-            color: #2C3E50; /* Dark navy text */
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-        table, th, td {
-            border: 2px solid #D4EFDF; /* Pastel green border */
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #2C3E50; /* Dark navy header */
-            color: #ffffff;
-        }
-        .loader {
-            border: 16px solid #f3f3f3;
-            border-top: 16px solid #2C3E50; /* Dark navy loader */
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-            .content div {
-                margin: 10px 0;
-            }
-        }
-        .reset-btn {
-            background-color: #D4EFDF; /* Pastel green */
-            color: #46465f; /* Dark navy text */
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .reset-btn:hover {
-            background-color: #B8E1C4; /* Slightly darker green on hover */
-            transform: scale(1.05);
-        }
-        .reset-btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5);
-        }
-        .error-popup {
-            display: none;
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #f44336; /* Red error popup */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            z-index: 9999;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-    </style>
+    }
+    .reset-btn {
+        background-color: #D4EFDF; /* Pastel green */
+        color: #46465f; /* Dark navy text */
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .reset-btn:hover {
+        background-color: #B8E1C4; /* Slightly darker green on hover */
+        transform: scale(1.05);
+    }
+    .reset-btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5);
+    }
+    .error-popup {
+        display: none;
+        position: fixed;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f44336; /* Red error popup */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        z-index: 9999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+</style>
 </head>
 <body>
 
@@ -180,7 +180,7 @@
     <textarea id="inputDataUngrouped" placeholder="e.g., 1, 2, 2, 3, 3, 3, 4, 4, 4, 4"></textarea>
     <br>
     <button onclick="calculateMedianUngrouped()">Calculate Median & MDME</button>
-    <button id="resetButton" onclick="resetFields()">Reset</button>
+    <button id="resetButton" onclick="resetFields()" class="reset-btn">Reset</button>
     
     <div class="loader" id="loaderUngrouped" style="display: none;"></div>
     <div class="output" id="outputUngrouped"></div>
@@ -253,8 +253,8 @@
     }
     </script>
     
-    </body>
-    </html>
+</body>
+</html>
 
 
 
