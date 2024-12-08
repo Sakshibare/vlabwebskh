@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discrete Data Mean Deviation Experiment</title>
+    <title>Discrete  Data Mean Deviation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9f9; /* Light gray background */
-            color: #333333; /* Dark gray text */
+            background-color: #FFFFFF; /* White background */
+            color: #2C3E50; /* Dark navy text */
             margin: 20px;
         }
         textarea, input, button {
@@ -18,14 +18,14 @@
         textarea {
             width: 100%;
             height: 100px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #D4EFDF; /* Pastel green border */
             border-radius: 5px;
             padding: 10px;
             background-color: #ffffff; /* White background for textarea */
         }
         button {
             padding: 10px 20px;
-            background-color: #1e2a38; /* Dark blue button */
+            background-color: #2C3E50; /* Dark navy button */
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -33,63 +33,95 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #142028; /* Darker blue on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
+            background-color: #1A252F; /* Darker navy on hover */
+            transform: scale(1.05);
         }
         button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(30, 42, 56, 0.5);
         }
-        #resetButton {
-            background-color: red; /* Red color for reset button */
+        .tooltip {
+            position: relative;
+            display: inline-block;
         }
-        #resetButton:hover {
-            background-color: darkred; /* Darker red on hover */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #2C3E50; /* Dark navy tooltip */
+            color: #ffffff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
         .output {
             margin-top: 20px;
         }
         .section {
-            border: 2px solid #1e2a38; /* Dark blue border */
-            background-color: #ffffff; /* White background for sections */
+            border: 2px solid #D4EFDF; /* Pastel green border */
+            background-color: #ffffff;
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
         }
         .section h3 {
-            margin-top: 0;
-            background-color: #1e2a38; /* Dark blue header background */
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 5px 5px 0 0;
+            color: #2C3E50; /* Dark navy text */
+            font-size: 18px;
+            border-bottom: 2px solid #D4EFDF; /* Underline in pastel green */
             text-align: center;
+            padding-bottom: 5px;
         }
         .content {
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping for smaller screens */
+            flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 20px;
         }
         .content div {
             flex: 1;
-            min-width: 250px; /* Minimum width for responsiveness */
+            min-width: 250px;
             margin: 0 10px;
-            border: 2px solid #1e2a38; /* Dark blue border */
+            border: 2px solid #D4EFDF; /* Pastel green border */
             padding: 10px;
             border-radius: 5px;
-            background-color: #f8f9f9; /* Light gray background for content boxes */
+            background-color: #f8f9f9;
             transition: background-color 0.3s ease;
         }
         .content div:hover {
-            background-color: #e0e0e0; /* Slightly darker gray on hover */
+            background-color: #e0e0e0;
         }
         .content h4 {
-            color: #1e2a38;
+            color: #2C3E50; /* Dark navy text */
             text-align: center;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        table, th, td {
+            border: 2px solid #D4EFDF; /* Pastel green border */
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2C3E50; /* Dark navy header */
+            color: #ffffff;
+        }
         .loader {
-            border: 16px solid #f3f3f3; /* Light gray */
-            border-top: 16px solid #1e2a38; /* Dark blue */
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #2C3E50; /* Dark navy loader */
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -100,6 +132,45 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            .content div {
+                margin: 10px 0;
+            }
+        }
+        .reset-btn {
+            background-color: #D4EFDF; /* Pastel green */
+            color: #46465f; /* Dark navy text */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .reset-btn:hover {
+            background-color: #B8E1C4; /* Slightly darker green on hover */
+            transform: scale(1.05);
+        }
+        .reset-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.5);
+        }
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336; /* Red error popup */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -109,7 +180,7 @@
 <textarea id="inputDataDiscrete" placeholder="e.g., 1:2, 2:3, 3:5, 4:1"></textarea>
 <br>
 <button onclick="calculateMedianDiscrete()">Calculate Median & MDME</button>
-<button id="resetButton" onclick="resetFields()">Reset</button>
+<button id="resetButton" class="reset-btn" onclick="resetFields()">Reset</button>
 
 <div class="loader" id="loaderDiscrete" style="display: none;"></div>
 <div class="output" id="outputDiscrete"></div>
