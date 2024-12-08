@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9f9;
-            color: #333333;
+            background-color: #FFFFFF; /* White background */
+            color: #2C3E50; /* Dark navy text */
             margin: 20px;
         }
         textarea, input, button {
@@ -18,14 +18,14 @@
         textarea {
             width: 100%;
             height: 100px;
-            border: 2px solid #1e2a38;
+            border: 2px solid #D4EFDF; /* Pastel green border */
             border-radius: 5px;
             padding: 10px;
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background for textarea */
         }
         button {
             padding: 10px 20px;
-            background-color: #1e2a38;
+            background-color: #2C3E50; /* Dark navy button */
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -33,7 +33,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         button:hover {
-            background-color: #142028;
+            background-color: #1A252F; /* Darker navy on hover */
             transform: scale(1.05);
         }
         button:focus {
@@ -47,7 +47,7 @@
         .tooltip .tooltiptext {
             visibility: hidden;
             width: 120px;
-            background-color: #1e2a38;
+            background-color: #2C3E50; /* Dark navy tooltip */
             color: #ffffff;
             text-align: center;
             border-radius: 5px;
@@ -68,19 +68,18 @@
             margin-top: 20px;
         }
         .section {
-            border: 2px solid #1e2a38;
+            border: 2px solid #D4EFDF; /* Pastel green border */
             background-color: #ffffff;
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
         }
         .section h3 {
-            margin-top: 0;
-            background-color: #1e2a38;
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 5px 5px 0 0;
+            color: #2C3E50; /* Dark navy text */
+            font-size: 18px;
+            border-bottom: 2px solid #D4EFDF; /* Underline in pastel green */
             text-align: center;
+            padding-bottom: 5px;
         }
         .content {
             display: flex;
@@ -92,7 +91,7 @@
             flex: 1;
             min-width: 250px;
             margin: 0 10px;
-            border: 2px solid #1e2a38;
+            border: 2px solid #D4EFDF; /* Pastel green border */
             padding: 10px;
             border-radius: 5px;
             background-color: #f8f9f9;
@@ -102,7 +101,7 @@
             background-color: #e0e0e0;
         }
         .content h4 {
-            color: #1e2a38;
+            color: #2C3E50; /* Dark navy text */
             text-align: center;
         }
         table {
@@ -112,17 +111,17 @@
             border-radius: 10px;
         }
         table, th, td {
-            border: 2px solid #1e2a38;
+            border: 2px solid #D4EFDF; /* Pastel green border */
             padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #1e2a38;
+            background-color: #2C3E50; /* Dark navy header */
             color: #ffffff;
         }
         .loader {
             border: 16px solid #f3f3f3;
-            border-top: 16px solid #1e2a38;
+            border-top: 16px solid #2C3E50; /* Dark navy loader */
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -142,8 +141,8 @@
             }
         }
         .reset-btn {
-            background-color: #e53935;
-            color: #ffffff;
+            background-color: #D4EFDF; /* Pastel green */
+            color: #2C3E50; /* Dark navy text */
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -151,7 +150,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .reset-btn:hover {
-            background-color: #c62828;
+            background-color: #B8E1C4; /* Slightly darker green on hover */
             transform: scale(1.05);
         }
         .reset-btn:focus {
@@ -164,7 +163,7 @@
             top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #f44336;
+            background-color: #f44336; /* Red error popup */
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -176,7 +175,7 @@
 </head>
 <body>
 
-<h1 style="color: #1e2a38;">Measures of Central Tendency Experiment</h1>
+<h1 style="color: #2C3E50;">Measures of Central Tendency Experiment</h1>
 <p>Enter a set of numbers separated by commas:</p>
 <textarea id="inputData" placeholder="e.g., 1, 2, 2, 3, 3, 3, 4, 4, 4, 4"></textarea>
 <br>
@@ -243,29 +242,45 @@ function calculateCentralTendency() {
             return;
         }
 
-        const sum = data.reduce((acc, num) => acc + num, 0);
-        const mean = (sum / data.length).toFixed(2);
+        const mean = data.reduce((acc, val) => acc + val, 0) / data.length;
+        const median = calculateMedian(data);
+        const mode = calculateMode(data);
 
-        // Sort data for median calculation
-        data.sort((a, b) => a - b);
-        const mid = Math.floor(data.length / 2);
-        const median = data.length % 2 === 0 ? ((data[mid - 1] + data[mid]) / 2).toFixed(2) : data[mid].toFixed(2);
-
-        // Calculate mode
-        const frequency = {};
-        data.forEach(num => frequency[num] = (frequency[num] || 0) + 1);
-        const mode = Object.keys(frequency).reduce((a, b) => frequency[a] > frequency[b] ? a : b);
-
-        const output = `
-            <h2>Results</h2>
-            <p><strong>Mean:</strong> ${mean}</p>
+        const outputDiv = document.getElementById('output');
+        outputDiv.innerHTML = `
+            <h3>Results:</h3>
+            <p><strong>Mean:</strong> ${mean.toFixed(2)}</p>
             <p><strong>Median:</strong> ${median}</p>
             <p><strong>Mode:</strong> ${mode}</p>
         `;
-        document.getElementById('output').innerHTML = output;
 
         loader.style.display = 'none'; // Hide loading spinner
-    }, 1500); // Simulate loading time
+    }, 1500); // Simulate loading delay
+}
+
+function calculateMedian(data) {
+    data.sort((a, b) => a - b); // Sort numbers
+    const middle = Math.floor(data.length / 2);
+
+    if (data.length % 2 === 0) {
+        return (data[middle - 1] + data[middle]) / 2;
+    } else {
+        return data[middle];
+    }
+}
+
+function calculateMode(data) {
+    const frequency = {};
+    data.forEach(value => {
+        frequency[value] = (frequency[value] || 0) + 1;
+    });
+
+    const maxFreq = Math.max(...Object.values(frequency));
+    const modes = Object.keys(frequency)
+        .filter(key => frequency[key] === maxFreq)
+        .map(Number);
+
+    return modes.length === 1 ? modes[0] : modes.join(', ');
 }
 
 function resetFields() {
@@ -276,4 +291,5 @@ function resetFields() {
 
 </body>
 </html>
+
 
