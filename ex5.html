@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-scale, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Continuous Data Mean Deviation Experiment</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9f9; /* Light gray background */
-            color: #333333; /* Dark gray text */
+            background-color: #FFFFFF; /* White background */
+            color: #2C3E50; /* Dark navy text */
             margin: 20px;
         }
         textarea, input, button {
@@ -18,7 +18,7 @@
         textarea {
             width: 100%;
             height: 100px;
-            border: 2px solid #337ab7; /* Blue border */
+            border: 2px solid #D4EFDF; /* Pastel green border */
             border-radius: 5px;
             padding: 10px;
             background-color: #ffffff; /* White background for textarea */
@@ -36,37 +36,35 @@
         }
         button:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(51, 122, 183, 0.5); /* Focus shadow */
+            box-shadow: 0 0 0 3px rgba(212, 239, 223, 0.5); /* Focus shadow */
         }
-        .blue-button {
-            background-color: #337ab7; /* Blue button */
+        .primary-button {
+            background-color: #2C3E50; /* Dark navy button */
         }
-        .blue-button:hover {
-            background-color: #285e8e; /* Darker blue on hover */
+        .primary-button:hover {
+            background-color: #1A252F; /* Darker navy on hover */
         }
-        .red-button {
-            background-color: #d9534f; /* Red button */
+        .secondary-button {
+            background-color: #D4EFDF; /* Pastel green button */
+            color: #2C3E50; /* Dark navy text for contrast */
         }
-        .red-button:hover {
-            background-color: #c9302c; /* Darker red on hover */
+        .secondary-button:hover {
+            background-color: #B8E1C4; /* Slightly darker green on hover */
         }
         .output {
             margin-top: 20px;
         }
         .section {
-            border: 2px solid #337ab7; /* Blue border */
-            background-color: #ffffff; /* White background for sections */
+            border: 2px solid #D4EFDF; /* Pastel green border */
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
         }
         .section h3 {
             margin-top: 0;
-            background-color: #337ab7; /* Blue header background */
-            color: #ffffff;
-            padding: 10px;
-            border-radius: 5px 5px 0 0;
+            color: #2C3E50; /* Dark navy for header text */
             text-align: center;
+            font-weight: bold;
         }
         .content {
             display: flex;
@@ -78,22 +76,22 @@
             flex: 1;
             min-width: 250px; /* Minimum width for responsiveness */
             margin: 0 10px;
-            border: 2px solid #337ab7; /* Blue border */
+            border: 2px solid #D4EFDF; /* Pastel green border */
             padding: 10px;
             border-radius: 5px;
-            background-color: #f8f9f9; /* Light gray background for content boxes */
+            background-color: #ffffff; /* White background for content boxes */
             transition: background-color 0.3s ease;
         }
         .content div:hover {
-            background-color: #e0e0e0; /* Slightly darker gray on hover */
+            background-color: #F9F9F9; /* Slightly lighter gray on hover */
         }
         .content h4 {
-            color: #337ab7;
+            color: #2C3E50; /* Dark navy for headings */
             text-align: center;
         }
         .loader {
             border: 16px solid #f3f3f3; /* Light gray */
-            border-top: 16px solid #337ab7; /* Blue */
+            border-top: 16px solid #2C3E50; /* Dark navy */
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -108,12 +106,12 @@
 </head>
 <body>
 
-<h1 style="color: #337ab7;">Continuous Data Mean Deviation Experiment</h1>
+<h1 style="color: #2C3E50;">Continuous Data Mean Deviation Experiment</h1>
 <p>Enter continuous data as Class Intervals, Frequency (F), separated by commas. Example: 0-10:2, 10-20:5, 20-30:3</p>
 <textarea id="inputDataContinuous" placeholder="e.g., 0-10:2, 10-20:5, 20-30:3"></textarea>
 <br>
-<button onclick="calculateMeanContinuous()" class="blue-button">Calculate Median & MDME</button>
-<button onclick="resetFields()" class="red-button">Reset</button>
+<button onclick="calculateMeanContinuous()" class="primary-button">Calculate Median & MDME</button>
+<button onclick="resetFields()" class="secondary-button">Reset</button>
 
 <div class="loader" id="loaderContinuous" style="display: none;"></div>
 <div class="output" id="outputContinuous"></div>
@@ -133,52 +131,55 @@
         </div>
     </div>
 </div>
-
 <script>
-function calculateMeanContinuous() {
-    const loader = document.getElementById('loaderContinuous');
-    loader.style.display = 'block'; // Show loading spinner
-
-    const input = document.getElementById('inputDataContinuous').value.trim();
+    function calculateMeanContinuous() {
+        const loader = document.getElementById('loaderContinuous');
+        loader.style.display = 'block'; // Show loading spinner
     
-    // Regular expression to match valid format: e.g., "0-10:2, 10-20:5"
-    const regex = /^(\d+-\d+:\d+)(,(\d+-\d+:\d+))*$/;
-
-    if (!regex.test(input)) {
-        alert('Invalid input format. Please follow the format: "0-10:2, 10-20:5, 20-30:3"');
-        loader.style.display = 'none';
-        return;
-    }
-
-    setTimeout(() => { // Simulate delay
-        const data = input
-            .split(',')
-            .map(entry => {
-                const [interval, f] = entry.split(':');
-                const [L, U] = interval.split('-').map(Number);
-                return { L, U, F: Number(f) };
-            })
-            .filter(({ L, U, F }) => !isNaN(L) && !isNaN(U) && !isNaN(F));
+        const input = document.getElementById('inputDataContinuous').value.trim();
         
-        const totalF = data.reduce((acc, { F }) => acc + F, 0);
-        const weightedMidpointSum = data.reduce((acc, { L, U, F }) => acc + ((L + U) / 2) * F, 0);
-        const mean = weightedMidpointSum / totalF;
-
-        const MDME = data.reduce((acc, { L, U, F }) => acc + F * Math.abs((L + U) / 2 - mean), 0) / totalF;
-        const output = `<h3>Calculation Results:</h3>
-                        <p><strong>Median:</strong> ${mean}</p>
-                        <p><strong>Mean Deviation (MDME):</strong> ${MDME}</p>`;
-        document.getElementById('outputContinuous').innerHTML = output;
-        loader.style.display = 'none';
-    }, 1000); // Simulate a 1-second calculation
-}
-
-function resetFields() {
-    document.getElementById('inputDataContinuous').value = '';
-    document.getElementById('outputContinuous').innerHTML = '';
-    document.getElementById('loaderContinuous').style.display = 'none';
-}
+        // Regular expression to match valid format: e.g., "0-10:2, 10-20:5"
+        const regex = /^(\d+-\d+:\d+)(,(\d+-\d+:\d+))*$/;
+    
+        if (!regex.test(input)) {
+            alert('Invalid input format. Please follow the format: "0-10:2, 10-20:5, 20-30:3"');
+            loader.style.display = 'none';
+            return;
+        }
+    
+        setTimeout(() => { // Simulate delay
+            const data = input
+                .split(',')
+                .map(entry => {
+                    const [interval, f] = entry.split(':');
+                    const [L, U] = interval.split('-').map(Number);
+                    return { L, U, F: Number(f) };
+                })
+                .filter(({ L, U, F }) => !isNaN(L) && !isNaN(U) && !isNaN(F));
+            
+            const totalF = data.reduce((acc, { F }) => acc + F, 0);
+            const weightedMidpointSum = data.reduce((acc, { L, U, F }) => acc + ((L + U) / 2) * F, 0);
+            const mean = weightedMidpointSum / totalF;
+    
+            const MDME = data.reduce((acc, { L, U, F }) => acc + F * Math.abs((L + U) / 2 - mean), 0) / totalF;
+            const output = `<h3>Calculation Results:</h3>
+                            <p><strong>Median:</strong> ${mean}</p>
+                            <p><strong>Mean Deviation (MDME):</strong> ${MDME}</p>`;
+            document.getElementById('outputContinuous').innerHTML = output;
+            loader.style.display = 'none';
+        }, 1000); // Simulate a 1-second calculation
+    }
+    
+    function resetFields() {
+        document.getElementById('inputDataContinuous').value = ''; 
+        document.getElementById('outputContinuous').innerHTML = '';
+        document.getElementById('loaderContinuous').style.display = 'none';
+    } 
 </script>
 
 </body>
 </html>
+
+
+
+
