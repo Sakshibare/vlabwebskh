@@ -190,16 +190,19 @@
     <div class="content">
         <div>
             <h4>Formula</h4>
-            <p><strong>Median:</strong> Formula for Median: (Sum of all X values multiplied by their frequencies) / (Sum of all frequencies).</p>
-            <p><strong>MDME:</strong> Formula: (Sum of absolute deviations from the Median multiplied by frequencies) / (Sum of frequencies).</p>
+            <p><strong>Median:</strong> If <em>N</em> is odd, Median = Value at the (<em>N</em> + 1) / 2th position. If <em>N</em> is even, Median = Average of values at <em>N</em>/2 and (<em>N</em>/2 + 1) positions.</p>
+            <p><strong>MDME:</strong> Formula: \( \text{MDME} = \frac{\sum |X - \text{Median}| \cdot F}{\sum F} \)</p>
         </div>
         <div>
             <h4>Calculation Process</h4>
-            <p>1. Calculate the Median by multiplying each X value by its frequency, summing the results, and dividing by the sum of the frequencies.</p>
-            <p>2. Compute the Mean Deviation (MDME) by finding the absolute deviations of each X value from the Median, multiplying by the frequencies, summing them, and dividing by the total sum of the frequencies.</p>
+            <p>1. Arrange the data in ascending order of <em>X</em>.</p>
+            <p>2. Calculate cumulative frequencies and find the Median position (N/2).</p>
+            <p>3. Identify the Median class using the cumulative frequency table.</p>
+            <p>4. Calculate MDME by summing the absolute deviations of <em>X</em> from the Median, multiplied by their respective frequencies, and dividing by the total frequency.</p>
         </div>
     </div>
 </div>
+
 
 <script>
 function calculateMedianDiscrete() {
@@ -258,5 +261,3 @@ function resetFields() {
 
 </body>
 </html>
-
-
