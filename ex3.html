@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Ungrouped Data Mean Deviation Experiment</title>
+    <title>Ungrouped Data Mean Deviation Experiment</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -188,18 +188,29 @@
     <div class="section">
         <h3>Ungrouped Data Analysis</h3>
         <div class="content">
-            <div>
-                <h4>Formula</h4>
-                <p><strong>Median:</strong> Formula for Median: (Sum of all values) / (Total number of values).</p>
-                <p><strong>MDME:</strong> Formula: (Sum of absolute deviations from the Median) / (Total number of values).</p>
-            </div>
-            <div>
-                <h4>Calculation Process</h4>
-                <p>1. Calculate the Median by summing all values and dividing by the total number of values.</p>
-                <p>2. Compute the Mean Deviation (MDME) by finding the absolute deviations of each value from the Median, summing them, and dividing by the total number of values.</p>
-            </div>
+    
+                <div>
+                    <h4>Formula</h4>
+                    <p><strong>Median:</strong> If N is odd, Median = middle value. If N is even, Median = average of the two middle values.</p>
+                    <p><strong>MDME:</strong> Mean Deviation from Median = (Σ |x - Median|) / N.</p>
+                </div>
+                <div>
+                    <h4>Calculation Process</h4>
+                    <p>1. Sort the data in ascending order.</p>
+                    <p>2. Find the Median:</p>
+                    <ul>
+                        <li>If N is odd, pick the middle value.</li>
+                        <li>If N is even, calculate the average of the two middle values.</li>
+                    </ul>
+                    <p>3. Compute MDME:</p>
+                    <ul>
+                        <li>Find the absolute deviation of each value from the Median.</li>
+                        <li>Sum all absolute deviations.</li>
+                        <li>Divide by the total number of data points (N).</li>
+                    </ul>
+                </div>
+        
         </div>
-    </div>
     
     <script>
     function calculateMedianUngrouped() {
@@ -255,6 +266,7 @@
     
 </body>
 </html>
+
 
 
 
