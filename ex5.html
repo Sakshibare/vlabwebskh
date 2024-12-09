@@ -121,16 +121,27 @@
     <div class="content">
         <div>
             <h4>Formula</h4>
-            <p><strong>Median:</strong> (Sum of midpoints of intervals multiplied by their frequencies) / (Sum of frequencies).</p>
-            <p><strong>MDME:</strong> (Sum of absolute deviations from the Median multiplied by frequencies) / (Sum of frequencies).</p>
+            <p><strong>Median:</strong> Use the formula:  
+            Median = L + [(N/2 - CF) / f] × h  
+            Where:</p>
+            <ul>
+                <li>L = Lower boundary of the median class</li>
+                <li>N = Total frequency</li>
+                <li>CF = Cumulative frequency before the median class</li>
+                <li>f = Frequency of the median class</li>
+                <li>h = Class width</li>
+            </ul>
+            <p><strong>MDME:</strong>  
+            MDME = (Σ |x - Median| × f) / Σf</p>
         </div>
         <div>
             <h4>Calculation Process</h4>
-            <p>1. Calculate the Median by multiplying each midpoint of intervals by its frequency, summing the results, and dividing by the sum of frequencies.</p>
-            <p>2. Compute the MDME by finding the absolute deviations from the Median, multiplying by frequencies, summing them, and dividing by the sum of frequencies.</p>
+            <p>1. Find the cumulative frequency (CF) and locate the median class, where CF is just above N/2.</p>
+            <p>2. Calculate the Median using the formula provided.</p>
+            <p>3. For MDME, calculate the midpoints of each class, then find the absolute difference from the Median for each.</p>
+            <p>4. Multiply the absolute differences by their frequencies, sum these values, and divide by the total frequency (Σf).</p>
         </div>
     </div>
-</div>
 <script>
     function calculateMeanContinuous() {
         const loader = document.getElementById('loaderContinuous');
@@ -179,7 +190,6 @@
 
 </body>
 </html>
-
 
 
 
